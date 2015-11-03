@@ -1,0 +1,22 @@
+{
+  "name": "cryptochat",
+  "version": "1.0.0",
+  "description": "Have an encrypted chat with your friends!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ijones16/cryptochat.git"
+  },
+  "author": "Ian Jones, Elias Nichols",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ijones16/cryptochat/issues"
+  },
+  "homepage": "https://github.com/ijones16/cryptochat#readme",
+  "dependencies": {
+    "pm2": "^0.15.9"
+  }
+}
