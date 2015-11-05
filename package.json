@@ -4,6 +4,8 @@
   "description": "Have an encrypted chat with your friends!",
   "main": "index.js",
   "scripts": {
+    "start": "node App.js",
+    "dev": "nodemon App.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +19,10 @@
   },
   "homepage": "https://github.com/ijones16/cryptochat#readme",
   "dependencies": {
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "lodash": "^3.10.1",
+    "mongoose": "^4.2.4",
     "pm2": "^0.15.9"
   }
 }
