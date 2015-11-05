@@ -46,30 +46,3 @@ app.get('/error/:username', function(req, res){
 var server = app.listen(3000, function () {
     console.log('Server running at http://localhost:' + server.address().port)
 });
-
-
-
-
-// routes interacting with the database, need to update them
-
-//if ('development' == app.get('env')) {
-//   //app.use(errorHandler);
-//    mongoose.connect('mongodb://localhost/cryptochat');
-//}
-//
-////load all files in models dir
-//fs.readdirSync(__dirname + '/models').forEach(function(filename) {
-//    if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename)
-//});
-//
-//app.get('/users', function(req, res) {
-//    mongoose.model('users').find(function(err, users) {
-//        res.send(users);
-//    });
-//});
-//
-//app.get('/messages', function(req, res) {
-//    mongoose.model('messages').find(function(err, messages) {
-//        res.send(messages);
-//    });
-//});
