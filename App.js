@@ -6,27 +6,7 @@ var path = require('path');
 var _ = require('lodash');
 var engines = require('consolidate');
 var bodyParser = require('body-parser');
-
-function getUserFilePath (username) {
-    return path.join(__dirname, 'users', username) + '.json'
-}
-
-// gets user for the http GET
-function getUser (username) {
-    var user = JSON.parse(fs.readFileSync(getUserFilePath(username), {encoding: 'utf8'}))
-    user.name.full = _.startCase(user.name.first + ' ' + user.name.last)
-    _.keys(user.location).forEach(function (key) {
-        user.location[key] = _.startCase(user.location[key])
-    });
-    return user
-}
-
-// saves a user from http PUT
-function saveUser (username, data) {
-    var fp = getUserFilePath(username);
-    fs.unlinkSync(fp); // delete the file
-    fs.writeFileSync(fp, JSON.stringify(data, null, 2), {encoding: 'utf8'})
-}
+var helpers = require('./helpers');
 
 
 // lets express know that handlebars is the view engine
@@ -55,29 +35,22 @@ app.get('/', function (req, res) {
 });
 
 
-// handles the http verbs from the view
-app.get('/:username', function (req, res) {
+// returns any user at this endpoint
+app.get('/data/:username', function(req, res){
     var username = req.params.username;
-    var user = getUser(username);
-    res.render('user', {
-        user: user,
-        address: user.location
-    })
+    var user = helpers.getUser(username);
+    res.json(user);
 });
 
-app.put('/:username', function (req, res) {
-    var username = req.params.username;
-    var user = getUser(username);
-    user.location = req.body;
-    saveUser(username, user);
-    res.end()
+// handles an invalid username
+app.get('/error/:username', function(req, res){
+    res.status(404).send('404, User not found.');
 });
 
-app.delete('/:username', function (req, res) {
-    var fp = getUserFilePath(req.params.username);
-    fs.unlinkSync(fp) // delete the file
-    res.sendStatus(200)
-});
+var userRouter = require('./username');
+app.use('/:username', userRouter);
+
+
 
 var server = app.listen(3000, function () {
     console.log('Server running at http://localhost:' + server.address().port)
