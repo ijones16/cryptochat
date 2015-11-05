@@ -6,7 +6,8 @@ var path = require('path');
 var _ = require('lodash');
 var engines = require('consolidate');
 var bodyParser = require('body-parser');
-var helpers = require('./helpers');
+
+var User = require('./db').User;
 
 
 // lets express know that handlebars is the view engine
@@ -21,36 +22,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', function (req, res) {
-    var users = [];
-    fs.readdir('users', function (err, files) {
-        files.forEach(function (file) {
-            fs.readFile(path.join(__dirname, 'users', file), {encoding: 'utf8'}, function (err, data) {
-                var user = JSON.parse(data);
-                user.name.full = _.startCase(user.name.first + ' ' + user.name.last);
-                users.push(user)
-                if (users.length === files.length) res.render('index', {users: users})
-            })
-        })
-    })
+    User.find({}, function (err, users){
+        res.render('index', {users: users});
+    });
 });
 
 
 // returns any user at this endpoint
 app.get('/data/:username', function(req, res){
     var username = req.params.username;
-    var user = helpers.getUser(username);
-    res.json(user);
-});
-
-// handles an invalid username
-app.get('/error/:username', function(req, res){
-    res.status(404).send('404, User not found.');
+    var readable = fs.createReadStream(('./users/' + username + '.json'));
+    readable.pipe(res);
 });
 
 var userRouter = require('./username');
 app.use('/:username', userRouter);
 
-
+// handles an invalid username
+app.get('/error/:username', function(req, res){
+    res.status(404).send('404, User not found.');
+});
 
 var server = app.listen(3000, function () {
     console.log('Server running at http://localhost:' + server.address().port)
