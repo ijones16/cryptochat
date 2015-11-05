@@ -1,60 +1,199 @@
-var express = require('express');
-//var routes = require('./routes');
-//var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
-var mongoose = require('mongoose');
-var fs = require('fs');
-var _ = require('lodash');
-var users = [];
+//var express = require('express');
+//var http = require('http');
+//var path = require('path');
+//var mongoose = require('mongoose');
+//var fs = require('fs');
+//var _ = require('lodash');
+//var engines = require('consolidate');
+//var users = [];
+//var bodyParser = ('body-parser');
+//
+//var app = express();
+//
+//app.set('port', process.env.PORT || 3000);
+//
+//function getUserFilePath (username) {
+//    return path.join(__dirname, 'users', username) + '.json'
+//}
+//
+//
+//// gets called on a username get request
+//function getUser (username){
+//    var user = JSON.parse(fs.readFileSync(getUserFilePath(username), {encoding: 'utf8'}));
+//    user.name.full = _.startCase(user.name.first + ' ' + user.name.last);
+//    _.keys(user.location).forEach(function (key) {
+//        user.location[key] = _.startCase(user.location[key])
+//    });
+//    return user;
+//}
+//
+//
+//// gets called on a put request
+//function saveUser (username, data) {
+//    var fp = getUserFilePath(username);
+//    fs.unlinkSync(fp);// delete the file
+//    fs.writeFileSync(fp, JSON.stringify(data, null, 2), {encoding: 'utf8'});
+//}
+//
+//
+//// lets express know that handlebars is going to be used
+//app.engine('hbs', engines.handlebars);
+//
+//// points express to the views folder, using handlebars.
+//app.set('views', './views');
+//app.set('view engine', 'hbs');
+//
+//// handles http verbs
+//app.use(bodyParser.urlencoded({ extended: true }));
+//
+//app.get('/', function(req, res){
+//    var users = [];
+//    fs.readdir('users', function (err, files) {
+//        files.forEach(function (file) {
+//            fs.readFile(path.join(__dirname, 'users', file), {encoding: 'utf8'}, function (err, data) {
+//                var user = JSON.parse(data);
+//                user.name.full = _.startCase(user.name.first + ' ' + user.name.last);
+//                users.push(user);
+//                if (users.length === files.length) res.render('index', {users: users})
+//            })
+//        })
+//    })
+//});
+//
+//app.get('/:username', function(req, res){
+//    var username = req.params.username;
+//    var user = getUser(username);
+//    res.render('user', {
+//        user: user,
+//        address: user.location
+//    });
+//});
+//
+//app.put('/:username', function(req, res){
+//    var username = req.params.username;
+//    var user = getUser(username);
+//    user.location = req.body;
+//    saveUser(username, user);
+//    res.end();
+//
+//});
+//
+//app.delete('/:username', function(req, res){
+//    var fp = getUserFilePath(req.params.username);
+//    fs.unlinkSync(fp); // delete the file
+//    res.sendStatus(200);
+//});
+//
+//
+//
+//
+//
+//
+//
+//
+//// routes interacting with the database, need to update them
+//
+//if ('development' == app.get('env')) {
+//   //app.use(errorHandler);
+//    mongoose.connect('mongodb://localhost/cryptochat');
+//}
+//
+////load all files in models dir
+//fs.readdirSync(__dirname + '/models').forEach(function(filename) {
+//    if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename)
+//});
+//
+//app.get('/users', function(req, res) {
+//    mongoose.model('users').find(function(err, users) {
+//        res.send(users);
+//    });
+//});
+//
+//app.get('/messages', function(req, res) {
+//    mongoose.model('messages').find(function(err, messages) {
+//        res.send(messages);
+//    });
+//});
+//
+//http.createServer(app).listen(app.get('port'), function(){
+//    console.log('Express server listening on port ' + app.get('port'));
+//});
 
-var app = express();
-app.set('port', process.env.PORT || 3000);
+var express = require('express')
+var app = express()
 
-fs.readFile('users.json', {encoding: 'utf8'}, function (err, data){
-    if (err) throw err;
+var fs = require('fs')
+var path = require('path')
+var _ = require('lodash')
+var engines = require('consolidate')
 
-    JSON.parse(data).forEach(function(user){
-        user.name.full = _.startCase(user.name.first + ' ' + user.name.last);
-        users.push(user);
-    })
-});
+var bodyParser = require('body-parser')
 
-app.set('views', './views');
-app.set('view engine', 'jade');
-
-
-app.get('/', function(req, res){
-    res.render('index', {users: users});
-});
-
-app.get('/:username', function(req, res){
-    var username = req.params.username;
-    res.send(username);
-});
-
-if ('development' == app.get('env')) {
-   //app.use(errorHandler);
-    mongoose.connect('mongodb://localhost/cryptochat');
+function getUserFilePath (username) {
+    return path.join(__dirname, 'users', username) + '.json'
 }
 
-//load all files in models dir
-fs.readdirSync(__dirname + '/models').forEach(function(filename) {
-    if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename)
-});
+function getUser (username) {
+    var user = JSON.parse(fs.readFileSync(getUserFilePath(username), {encoding: 'utf8'}))
+    user.name.full = _.startCase(user.name.first + ' ' + user.name.last)
+    _.keys(user.location).forEach(function (key) {
+        user.location[key] = _.startCase(user.location[key])
+    })
+    return user
+}
 
-app.get('/users', function(req, res) {
-    mongoose.model('users').find(function(err, users) {
-        res.send(users);
-    });
-});
+function saveUser (username, data) {
+    var fp = getUserFilePath(username)
+    fs.unlinkSync(fp) // delete the file
+    fs.writeFileSync(fp, JSON.stringify(data, null, 2), {encoding: 'utf8'})
+}
 
-app.get('/messages', function(req, res) {
-    mongoose.model('messages').find(function(err, messages) {
-        res.send(messages);
-    });
-});
+app.engine('hbs', engines.handlebars)
 
-http.createServer(app).listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
-});
+app.set('views', './views')
+app.set('view engine', 'hbs')
+
+
+app.use(bodyParser.urlencoded({ extended: true }))
+
+
+app.get('/', function (req, res) {
+    var users = []
+    fs.readdir('users', function (err, files) {
+        files.forEach(function (file) {
+            fs.readFile(path.join(__dirname, 'users', file), {encoding: 'utf8'}, function (err, data) {
+                var user = JSON.parse(data)
+                user.name.full = _.startCase(user.name.first + ' ' + user.name.last)
+                users.push(user)
+                if (users.length === files.length) res.render('index', {users: users})
+            })
+        })
+    })
+})
+
+app.get('/:username', function (req, res) {
+    var username = req.params.username
+    var user = getUser(username)
+    res.render('user', {
+        user: user,
+        address: user.location
+    })
+})
+
+app.put('/:username', function (req, res) {
+    var username = req.params.username
+    var user = getUser(username)
+    user.location = req.body
+    saveUser(username, user)
+    res.end()
+})
+
+app.delete('/:username', function (req, res) {
+    var fp = getUserFilePath(req.params.username)
+    fs.unlinkSync(fp) // delete the file
+    res.sendStatus(200)
+})
+
+var server = app.listen(3000, function () {
+    console.log('Server running at http://localhost:' + server.address().port)
+})
