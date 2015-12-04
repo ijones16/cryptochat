@@ -1,0 +1,30 @@
+{
+    "name": "cryptochat",
+    "description": "the api server for cryptochat",
+    "main": "researchcore",
+    "author": "Elias",
+    "version": "0.0.1",
+    "dependencies": {
+        "archiver": "x",
+        "async": "0.2.9",
+        "express": "4.x",
+        "file": "0.1.1",
+        "body-parser": "x",
+        "crypto": "0.0.3",
+        "mongoose": "3.8.23",
+        "mongoose-text-search": "0.0.2",
+        "mongoose-schema-extend": "0.1.7",
+        "underscore": "1.5.2",
+        "winston": "0.7.2",
+        "winston-mongodb": "0.4.3",
+        "request": "2.29.0",
+        "grunt": "x",
+        "colors": "x",
+        "mongodb": "x",
+    	"prompt": "x",
+        "cli-table": "x",
+        "moment": "^2.9.0"
+    },
+    "devDependencies": {
+    }
+}
