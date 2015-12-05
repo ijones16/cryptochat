@@ -4,10 +4,9 @@
 var mongoose = require('mongoose')
     , Schema = mongoose.Schema
     , ObjectId = Schema.ObjectId
-    , UserSchema = require('../../users/entities/user.js')
 module.exports = function(){
     var MessageSchema = new Schema({
-      text:{type:String}
+        text:{type:String}
        ,name:{type:String}
     });
      var ConversationSchema = new Schema({
@@ -15,7 +14,7 @@ module.exports = function(){
          ,messages:[MessageSchema]
          ,created: { type: Date, default:new Date() }
          ,messageCount: {type:Number}
-         ,users:[UserSchema.UserSchema]
+         ,users:[{type: ObjectId, ref :'User'}]
      })
     mongoose.model('Conversation', ConversationSchema);
     mongoose.model('Messages', MessageSchema);
