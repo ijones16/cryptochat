@@ -1,0 +1,16 @@
+{
+	"host":"http://localhost:5656",
+    "mongo" : {
+        "connections" : "mongodb://localhost/cryptotesting",
+        "authentication" : {
+            "authenticate" : false,
+            "username" : "",
+            "password" : ""
+        },
+        "useSSL" : false,
+        "replSet" : {
+            "isSet" : true,
+            "name" : ""
+        }
+    }
+}
