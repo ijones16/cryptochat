@@ -33,7 +33,20 @@ module.exports = function () {
             });
         });
     });
+    UserSchema.methods.comparePassword = function(candidatePassword,cb){
+        var user = this;
+        if(!candidatePassword)return new Error('No password provided.')
+
+
+        Crypto.pbkdf2(candidatePassword,user.salt,473,512,function(err,candidateHash){
+            if(err) return cb(err)
+            if(candidateHash.toString('binary')===user.password){
+                cb(null, true)
+            }else{
+                cb(null, false)
+
+            }
+        });
+    };
     mongoose.model('User', UserSchema);
-
-
 }()

@@ -16,7 +16,7 @@ var helpers = {
     },
 
     userLogin: function(username, password){
-        return axios.get(host + '/users/login/' + username, {
+        return axios.post(host + '/users/login/' + username, {
                 name: username,
                 password: password
             })

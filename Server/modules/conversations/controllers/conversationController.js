@@ -33,9 +33,18 @@ exports.newMessage = function(props, next){
     })
 }
 exports.getConversations = function(props, next){
+    var convos = []
     Conversation.find({users: props.uId}, function(err, conversations){
         if(err) return next(err);
-        return next(null, conversations);
+        async.eachSeries(conversations, function(item, cb){
+            var ob = {_id: item._id, name: item.name}
+            convos.push(ob);
+            cb()
+
+        }, function finalizer(err){
+            if(err) return next(err);
+            return next(null, convos)
+        })
     })
 }
 exports.getConversation = function(props, next){

@@ -20,25 +20,27 @@ exports.addUser = function (props, next) {
 exports.login = function (user, next) {
     User.findOne({name: user.name}, function (err, dbuser) {
         if (err) return next(err);
-        if(dbuser){
-        user.password = Crypto.pbkdf2(user.password, dbuser.salt, 473, 512, function (err, hashedPass) {
-            if (err) return next(err);
-            user.password = hashedPass.toString('binary');
-            if (dbuser.password == user.password) {
-                return next(null, dbuser);
-            }
-            else {
-                return next(null);
-            }
-        })
+        if (dbuser) {
+            dbuser.comparePassword(user.password, function (err, isMatch) {
+                if (err) return next(err);
+                if (isMatch == true) {
+                    console.log("is match")
+                    return next(null, dbuser);
+                }
+                else {
+                    console.log("is not match")
+
+                    return next(null);
+                }
+            })
         }
-        else{
+        else {
             return next(null)
         }
     })
 }
-exports.findUser = function(props, next){
-    user.find({name: props.name}, function(err, dbuser){
+exports.findUser = function (props, next) {
+    user.find({name: props.name}, function (err, dbuser) {
         if (err) return next(err);
         next(null, dbuser);
     })
