@@ -1,21 +1,22 @@
 var React = require('react');
+require('./ContactList.css');
 
 var ContactsList = React.createClass({
 
-
     render: function(){
 
-        var friends = this.props.friends.map(function(friend, index){
+        var conversations = this.props.conversations.map(function(conversation, index){
             return <li
-                className="list-group-item"
+                className="list-group-item contact-list"
                 key={index}
-                onClick={this.props.handleClick.bind(null, friend, index)}>
-                {friend} </li>
+                onClick={this.props.handleClick.bind(null, conversation, index)}>
+                {conversation}
+                 </li>
         }, this);
         return (
             <div className="col-sm-12">
                 <ul>
-                    {friends}
+                    {conversations}
                 </ul>
 
             </div>

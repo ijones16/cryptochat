@@ -1,4 +1,4 @@
-var React = require('react');
+var React   = require('react');
 var History = require('react-router').History;
 
 var Login = React.createClass({

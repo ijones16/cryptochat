@@ -1,17 +1,22 @@
-var React = require('react');
-var Router = require('react-router');
+var React       = require('react');
+var Router      = require('react-router');
 var ContactList = require('./ContactList');
-var History = require('react-router').History;
+var History     = require('react-router').History;
+var helpers     = require('../../utils/helpers');
 
 var Contacts = React.createClass({
     mixins: [Router.State, History],
     getInitialState: function(){
         return {
-            friends: ["thelias", "bridger", "zacjones"]
+            conversations: ["thelias", "bridger", "zacjones"]
         }
     },
-    handleClick: function(friend, index){
-        this.history.pushState(null, "contacts/" + this.props.params.username + "/conversation/" + friend);
+    componentDidMount: function(){
+        helpers.getAllConversations(this.props.params.username);
+
+    },
+    handleClick: function(conversation, index){
+        this.history.pushState(null, "contacts/" + this.props.params.username + "/conversation/" + conversation);
     },
     render: function(){
         var username = this.props.params.username;
@@ -20,7 +25,10 @@ var Contacts = React.createClass({
                 <h4 className="text-center">
                     {username}'s Conversations:
                 </h4>
-                <ContactList username={username} friends={this.state.friends} handleClick={this.handleClick}/>
+                <ContactList
+                    username={username}
+                    conversations={this.state.conversations}
+                    handleClick={this.handleClick}/>
             </div>
         );
     }

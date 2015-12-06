@@ -1,0 +1,5 @@
+.contact-list {
+    cursor: pointer;
+}
+
+.contact-list:hover {  background-color: #e0e0e0;  }
