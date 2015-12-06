@@ -9,13 +9,19 @@ var Login = React.createClass({
         var password = this.refs.logPassword.value;
         this.refs.logUsername.value = '';
         this.refs.logPassword.value = '';
+
         // log in logic
         helpers.userLogin(username, password)
         .then(function(response){
             console.log(response);
+            console.log('logged in');
+            this.history.pushState(null, "contacts/" + username)
+        })
+        .catch(function(response){
+            console.log(response);
         });
 
-        this.history.pushState(null, "contacts/" + username)
+
     },
     handleRegister: function(){
         var username = this.refs.regUsername.value;

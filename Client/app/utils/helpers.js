@@ -24,8 +24,9 @@ var helpers = {
     },
 
     getAllConversations: function (userId){
-        console.log('cant get conversations for ' + userId + " yet");
-        //return axios.get('ip' + userId);
+        return axios.get(host + "/conversations", {
+            uId: userId
+        });
     },
     getConversation: function (conversationId){
         console.log('cant get single conversation yet');
