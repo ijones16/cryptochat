@@ -12,6 +12,8 @@ app = express();
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb'}));
 //app.use(_logger.usage);
+var cors = require('cors');
+app.use(cors());
 
 
 
@@ -68,10 +70,5 @@ mongoose.connection.on('disconnected', function () {
 mongoose.connection.on('reconnected', function(){
     logger.info('Mongoose Reconnected', {time: new Date(), code:'M3'});
 })
-app.all('*', function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With,bakon,ham,iohost,apphost');
-    next();
-});
+
 app_process = app.listen(5656);

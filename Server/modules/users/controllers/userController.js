@@ -11,30 +11,35 @@ exports.getUsers = function (props, next) {
     })
 }
 exports.addUser = function (props, next) {
-    var usr = new User(props);
-    usr.save(function (err, item) {
+    var dbuser = new User(props);
+    dbuser.save(function (err, item) {
         if (err) return next(err);
         next(null, item);
     })
 }
 exports.login = function (user, next) {
-    User.findOne({name: user.name}, function (err, usr) {
+    User.findOne({name: user.name}, function (err, dbuser) {
         if (err) return next(err);
-        user.password = Crypto.pbkdf2(user.password, usr.salt, 473, 512, function (err, hashedPass) {
+        if(dbuser){
+        user.password = Crypto.pbkdf2(user.password, dbuser.salt, 473, 512, function (err, hashedPass) {
             if (err) return next(err);
             user.password = hashedPass.toString('binary');
-            if (usr.password == user.password) {
-                return next(null, usr);
+            if (dbuser.password == user.password) {
+                return next(null, dbuser);
             }
             else {
                 return next(null);
             }
         })
+        }
+        else{
+            return next(null)
+        }
     })
 }
 exports.findUser = function(props, next){
-    user.find({name: props.name}, function(err, usr){
+    user.find({name: props.name}, function(err, dbuser){
         if (err) return next(err);
-        next(null, usr);
+        next(null, dbuser);
     })
 }

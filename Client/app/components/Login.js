@@ -10,7 +10,10 @@ var Login = React.createClass({
         this.refs.logUsername.value = '';
         this.refs.logPassword.value = '';
         // log in logic
-
+        helpers.userLogin(username, password)
+        .then(function(response){
+            console.log(response);
+        });
 
         this.history.pushState(null, "contacts/" + username)
     },
