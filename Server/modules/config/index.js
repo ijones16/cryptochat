@@ -6,7 +6,8 @@ var mongoose = require("mongoose");
 var connString = settings.mongo.connections;
 var _logger = require('./logger.js');
 logger = _logger.logger;
-
+console.log('Loading Entities...');
+require('./entities');
 
 var connectionOptions = {}
 
