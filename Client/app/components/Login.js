@@ -1,5 +1,6 @@
 var React   = require('react');
 var History = require('react-router').History;
+var helpers = require('../utils/helpers');
 
 var Login = React.createClass({
     mixins: [History],
@@ -19,7 +20,8 @@ var Login = React.createClass({
         this.refs.regUsername.value = '';
         this.refs.regPassword.value = '';
 
-        this.history.pushState(null, "contacts/" + username)
+        helpers.newUser(username, password);
+
     },
     render: function(){
         return (
