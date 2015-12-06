@@ -70,6 +70,7 @@ app.get('/users/login/:id', function (req, res) {
                 return res.status(500).send('Bad Request');
             }
             //TODO:send usage
+            console.log(items);
             if (items) {
                 res.status(200).send(items);
             }

@@ -24,11 +24,9 @@ exports.login = function (user, next) {
             dbuser.comparePassword(user.password, function (err, isMatch) {
                 if (err) return next(err);
                 if (isMatch == true) {
-                    console.log("is match")
                     return next(null, dbuser);
                 }
                 else {
-                    console.log("is not match")
 
                     return next(null);
                 }
