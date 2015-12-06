@@ -1,4 +1,4 @@
-require('../entities/');
+require('../entities/user');
 var mongoose = require('mongoose')
     , async = require('async')
     , _ = require('underscore')

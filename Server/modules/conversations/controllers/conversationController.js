@@ -1,7 +1,7 @@
 /**
  * Created by Elias on 12/5/2015.
  */
-require('../entities/');
+require('../entities/conversations');
 var mongoose = require('mongoose')
     , async = require('async')
     , _ = require('underscore')

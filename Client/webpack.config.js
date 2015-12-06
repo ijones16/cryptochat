@@ -27,11 +27,8 @@ module.exports = {
                     cacheDirectory: true,
                     presets: ['react']
                 }
-            },
-            {
-                test: /\.css$/,
-                loader: "style-loader!css-loader"
-            },
+            }
+
         ]
     }
 };

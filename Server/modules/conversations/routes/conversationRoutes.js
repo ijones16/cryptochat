@@ -2,7 +2,6 @@
  * Created by Elias on 12/5/2015.
  */
 var conversationController = require('../controllers/conversationController');
-
 app.get('/conversations', function (req, res) {
     try {
         conversationController.getConversations(req.body, function (err, items) {
