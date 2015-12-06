@@ -1,4 +1,6 @@
 settings = require('../config/settingsBootstrapper.js').loadSettings();
+require('../users/entities/user');
+
 var mongoose = require("mongoose");
 var _logger = require('../config/logger.js');
 logger = _logger.logger;
@@ -8,11 +10,11 @@ var connectionOptions = {}
 //mongoose.set('debug', true);
 var db = mongoose.connect(connString, connectionOptions);
 // When successfully connected
-User = mongoose.model('User');
 mongoose.connection.on('connected', function () {
     logger.info('Mongoose Connected', {time: new Date(), code: 'M3'});
 });
-
+//parameters: node dummyData.js {existing user1} {existing user2}
+var User = mongoose.model('User');
 var user1 = process.argv[2]
 var user2 = process.argv[3]
 var testUsers = []
