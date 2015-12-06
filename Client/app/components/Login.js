@@ -9,13 +9,23 @@ var Login = React.createClass({
         var password = this.refs.logPassword.value;
         this.refs.logUsername.value = '';
         this.refs.logPassword.value = '';
+        var self = this;
         // log in logic
         helpers.userLogin(username, password)
         .then(function(response){
-            console.log(response);
+           if(response.status === 200){
+               self.history.pushState(null , "contacts/" + username);
+           } else{
+               console.log('user shouldnt log in');
+           }
+
+
+        })
+        .catch(function(response){
+            console.log("error: " + response);
         });
 
-        this.history.pushState(null, "contacts/" + username)
+
     },
     handleRegister: function(){
         var username = this.refs.regUsername.value;
@@ -38,7 +48,7 @@ var Login = React.createClass({
                         </div>
                         <div>
                             <span>password</span>
-                            <input type="text" className="form-control" ref="logPassword"/>
+                            <input type="password" className="form-control" ref="logPassword"/>
                         </div>
                         <div>
                             <button type="submit" className="btn btn-primary">Log in</button>
@@ -54,7 +64,7 @@ var Login = React.createClass({
                         </div>
                         <div>
                             <span>password</span>
-                            <input type="text" className="form-control" ref="regPassword"/>
+                            <input type="password" className="form-control" ref="regPassword"/>
                         </div>
                         <div>
                             <button type="submit" className="btn btn-success">Register</button>

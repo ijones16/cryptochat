@@ -32,6 +32,7 @@ app.get('/users', function (req, res) {
 app.get('/users/:id', function (req, res) {
     try {
         userController.findUser(req.body, function (err, items) {
+            console.log(req.body);
             if (err) {
                 logger.badrequest('get: /users/:id', {
                     time: new Date(),
@@ -56,7 +57,8 @@ app.get('/users/:id', function (req, res) {
         return res.status(500).send('Bad Request');
     }
 })
-app.get('/users/login/:id', function (req, res) {
+app.post('/users/login/:id', function (req, res) {
+    console.log(req.body);
     try {
         userController.login(req.body, function (err, items) {
             if (err) {
