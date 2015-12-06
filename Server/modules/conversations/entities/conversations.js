@@ -11,6 +11,7 @@ module.exports = function(){
     });
      var ConversationSchema = new Schema({
          _id:{type: ObjectId}
+         ,name:{type: String}
          ,messages:[MessageSchema]
          ,created: { type: Date, default:new Date() }
          ,messageCount: {type:Number}
