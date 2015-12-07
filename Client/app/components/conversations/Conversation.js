@@ -9,29 +9,23 @@ var Conversation = React.createClass({
     },
 
     componentDidMount: function(){
-        helpers.getConversation(this.props.params.conversation)
+        var cId = localStorage.getItem('cId');
+        helpers.getConversation(cId)
             .then(function(response){
+                console.log(response);
                 this.setState({
-                    messages: response.messages,
+                    messages: response.data[0].messages
                 });
             }.bind(this));
-
-        //helpers.getAllConversations(userId)
-        //    .then(function(response){
-        //        console.log(response);
-        //        this.setState({
-        //            conversations: response.data
-        //        })
-        //    }.bind(this));
     },
 
     render: function(){
         var conversationName = this.props.params.conversation;
         return (
             <div className="col-sm-12">
-                <div>{conversationName} Conversation:</div>
+                <div className="text-center">{conversationName} Conversation:</div>
                 <ConversationList messages={this.state.messages}/>
-                <ConversationInput/>
+                <ConversationInput user={this.props.params.username}/>
             </div>
         );
     }

@@ -39,11 +39,26 @@ var helpers = {
     },
 
     getConversation: function (conversationId){
-        return axios.get(host + "/conversations/" + conversationId);
+        return axios({
+            url: host + "/conversations/" + conversationId,
+            method: 'GET',
+            headers: {
+                cid: conversationId
+            }
+        });
     },
 
-    postMessage: function (text, conversationId){
-        console.log('this will post a new message to the conversation')
+    postMessage: function (text, user, conversationId){
+        return axios({
+            url: host + "/conversations/" + conversationId,
+            method: 'PUT',
+            headers: {
+                cid: conversationId,
+                message: text,
+                name: user
+            }
+
+        })
     }
 };
 

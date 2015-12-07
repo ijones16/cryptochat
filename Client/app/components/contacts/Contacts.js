@@ -15,7 +15,6 @@ var Contacts = React.createClass({
         var userId = localStorage.getItem('uId');
         helpers.getAllConversations(userId)
             .then(function(response){
-                console.log(response);
                 this.setState({
                     conversations: response.data
                 })

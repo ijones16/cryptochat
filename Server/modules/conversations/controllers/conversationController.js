@@ -15,10 +15,10 @@ exports.addConversation = function(props, next){
     })
 }
 exports.addMessageToConversation = function(props, next){
-     Conversation.findOne({_id: props._id}, function(err, item){
-        if(err) return next(err)
+     Conversation.findOne({_id: props.headers.cid}, function(err, item){
+        if(err) return next(err);
          item.messageCount++;
-         item.messages.push(props.message);
+         item.messages.push({text: props.headers.message, name: props.headers.name});
          item.save(function (err, item1){
              if(err) return next(err);
              return next(null, item1);
@@ -47,8 +47,8 @@ exports.getConversations = function(uid, next){
         })
     })
 }
-exports.getConversation = function(props, next){
-    Conversation.find({_id: props._id}, function(err, conversation){
+exports.getConversation = function(cid, next){
+    Conversation.find({_id: cid}, function(err, conversation){
         if(err) return next(err);
         return next(null, conversation);
     })

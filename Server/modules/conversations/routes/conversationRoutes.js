@@ -30,8 +30,8 @@ app.get('/conversations', function (req, res) {
 })
 app.get('/conversations/:id', function (req, res) {
     try {
-        if (req.body.check) {
-            conversationController.newMessage(req.body, function (err, items) {
+        if (req.headers.check) {
+            conversationController.newMessage(req.headers.cid, function (err, items) {
                 if (err) {
                     logger.badrequest('get: /conversations/:id', {
                         time: new Date(),
@@ -46,7 +46,7 @@ app.get('/conversations/:id', function (req, res) {
             })
         }
         else {
-            conversationController.getConversation(req.body, function (err, items) {
+            conversationController.getConversation(req.headers.cid, function (err, items) {
                 if (err) {
                     logger.badrequest('get: /conversations/:id', {
                         time: new Date(),
@@ -99,7 +99,7 @@ app.post('/conversations', function (req, res) {
 })
 app.put('/conversations/:id', function (req, res) {
     try {
-        conversationController.addMessageToConversation(req.body, function (err, items) {
+        conversationController.addMessageToConversation(req, function (err, items) {
             if (err) {
                 logger.badrequest('get: /conversations', {
                     time: new Date(),
