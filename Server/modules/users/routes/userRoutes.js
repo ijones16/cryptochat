@@ -29,12 +29,12 @@ app.get('/users', function (req, res) {
         return res.status(500).send('Bad Request');
     }
 })
-app.get('/users/:id', function (req, res) {
+app.get('/users/:name', function (req, res) {
     try {
-        userController.findUser(req.headers, function (err, items) {
-            console.log(req.body);
+        userController.findUser(req.params, function (err, items) {
+            console.log(req.headers);
             if (err) {
-                logger.badrequest('get: /users/:id', {
+                logger.badrequest('get: /users/:name', {
                     time: new Date(),
                     body: req.body,
                     params: req.params,
@@ -47,7 +47,7 @@ app.get('/users/:id', function (req, res) {
             res.status(200).send(items);
         })
     } catch (e) {
-        logger.error('get: /users/:id', {
+        logger.error('get: /users/:name', {
             time: new Date(),
             body: req.body,
             params: req.params,

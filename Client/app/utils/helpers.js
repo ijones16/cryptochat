@@ -23,13 +23,8 @@ var helpers = {
 
     },
     findUser: function(name){
-        return axios({
-            url: host + "/users/:id",
-            method: 'GET',
-            headers: {
-                name: name
-            }
-        })
+        return axios.get(host + "/users/" + name);
+
     },
     getAllConversations: function (userId){
         return axios({

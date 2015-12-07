@@ -1,5 +1,5 @@
 var React = require('react');
-require('./ContactList.css');
+//require('./ContactList.css');
 
 var ContactsList = React.createClass({
 
