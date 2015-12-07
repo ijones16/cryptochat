@@ -6,7 +6,7 @@ var ConversationList = React.createClass({
         var messages = this.props.messages.map(function(message, index){
             return <li
                 key={index}>
-                {message.text}
+                <span>{message.name}: {message.text}</span>
                 </li>
         });
         return (

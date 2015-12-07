@@ -99,7 +99,7 @@ app.post('/conversations', function (req, res) {
 })
 app.put('/conversations/:id', function (req, res) {
     try {
-        conversationController.addMessageToConversation(req.body, function (err, items) {
+        conversationController.addMessageToConversation(req, function (err, items) {
             if (err) {
                 logger.badrequest('get: /conversations', {
                     time: new Date(),

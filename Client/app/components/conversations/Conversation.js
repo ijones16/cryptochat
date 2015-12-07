@@ -25,7 +25,7 @@ var Conversation = React.createClass({
             <div className="col-sm-12">
                 <div className="text-center">{conversationName} Conversation:</div>
                 <ConversationList messages={this.state.messages}/>
-                <ConversationInput/>
+                <ConversationInput user={this.props.params.username}/>
             </div>
         );
     }

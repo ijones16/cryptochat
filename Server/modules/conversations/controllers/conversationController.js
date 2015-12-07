@@ -15,10 +15,10 @@ exports.addConversation = function(props, next){
     })
 }
 exports.addMessageToConversation = function(props, next){
-     Conversation.findOne({_id: props._id}, function(err, item){
-        if(err) return next(err)
+     Conversation.findOne({_id: props.headers.cid}, function(err, item){
+        if(err) return next(err);
          item.messageCount++;
-         item.messages.push(props.message);
+         item.messages.push({text: props.headers.message, name: props.headers.name});
          item.save(function (err, item1){
              if(err) return next(err);
              return next(null, item1);

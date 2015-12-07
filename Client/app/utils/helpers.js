@@ -53,8 +53,17 @@ var helpers = {
         });
     },
 
-    postMessage: function (text, conversationId){
-        console.log('this will post a new message to the conversation')
+    postMessage: function (text, user, conversationId){
+        return axios({
+            url: host + "/conversations/" + conversationId,
+            method: 'PUT',
+            headers: {
+                cid: conversationId,
+                message: text,
+                name: user
+            }
+
+        })
     }
 };
 
