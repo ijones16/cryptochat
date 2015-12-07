@@ -27,8 +27,8 @@ var helpers = {
         return axios({
             url: host + "/conversations/",
             method: 'GET',
-            params: {
-                uId: userId
+            headers: {
+                uid: userId
             }
         });
 

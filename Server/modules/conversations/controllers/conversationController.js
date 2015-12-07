@@ -32,9 +32,9 @@ exports.newMessage = function(props, next){
         return next(null, item.messageCount)
     })
 }
-exports.getConversations = function(props, next){
+exports.getConversations = function(uid, next){
     var convos = []
-    Conversation.find({users: {"$in" : [props.uId] }}, function(err, conversations){
+    Conversation.find({users: {"$in" : [uid] }}, function(err, conversations){
         if(err) return next(err);
         async.eachSeries(conversations, function(item, cb){
             var ob = {_id: item._id, name: item.name}

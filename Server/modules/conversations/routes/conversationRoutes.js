@@ -4,7 +4,7 @@
 var conversationController = require('../controllers/conversationController');
 app.get('/conversations', function (req, res) {
     try {
-        conversationController.getConversations(req.body, function (err, items) {
+        conversationController.getConversations(req.headers.uid, function (err, items) {
             if (err) {
                 logger.badrequest('get: /conversations', {
                     time: new Date(),

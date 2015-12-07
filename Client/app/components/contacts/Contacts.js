@@ -14,10 +14,10 @@ var Contacts = React.createClass({
     componentDidMount: function(){
         var userId = localStorage.getItem('uId');
         helpers.getAllConversations(userId)
-            .then(function(data){
-                console.log(data);
+            .then(function(response){
+                console.log(response);
                 this.setState({
-                    conversations: data
+                    conversations: response.data
                 })
             }.bind(this));
 
