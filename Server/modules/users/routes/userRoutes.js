@@ -4,7 +4,7 @@
 var userController = require('../controllers/userController');
 app.get('/users', function (req, res) {
     try {
-        userController.getUsers(req.body, function (err, items) {
+        userController.getUsers(req, function (err, items) {
             if (err) {
                 logger.badrequest('get: /users', {
                     time: new Date(),
