@@ -4,19 +4,33 @@ var ConversationInput = require('./ConversationInput');
 var helpers           = require('../../utils/helpers');
 
 var Conversation = React.createClass({
+
     getInitialState: function(){
-        return {messages: []}
+        return {
+            messages: [],
+            cId: localStorage.getItem('cId')
+        }
     },
 
     componentDidMount: function(){
-        var cId = localStorage.getItem('cId');
-        helpers.getConversation(cId)
+
+        helpers.getConversation(this.state.cId)
             .then(function(response){
-                console.log(response);
                 this.setState({
                     messages: response.data[0].messages
                 });
             }.bind(this));
+    },
+
+    shouldComponentUpdate: function(nextProps, nextState) {
+        console.log("query has run");
+        helpers.getConversation(this.state.cId)
+            .then(function(response){
+                this.setState({
+                    messages: response.data[0].messages
+                });
+            }.bind(this));
+        return true;
     },
 
     render: function(){

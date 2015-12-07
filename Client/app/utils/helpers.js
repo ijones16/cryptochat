@@ -24,6 +24,13 @@ var helpers = {
     },
     findUser: function(name){
         return axios.get(host + "/users/" + name);
+        return axios({
+            url: host + '/users/' + name,
+            method: 'GET',
+            headers: {
+                name: name
+            }
+        })
 
     },
     getAllConversations: function (userId){

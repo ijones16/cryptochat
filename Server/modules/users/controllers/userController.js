@@ -38,7 +38,7 @@ exports.login = function (user, next) {
     })
 }
 exports.findUser = function (props, next) {
-    User.find({name: props.name}, function (err, dbuser) {
+    User.find({name: props.id}, function (err, dbuser) {
         if (err) return next(err);
         next(null, dbuser);
     })
