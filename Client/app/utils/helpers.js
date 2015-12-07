@@ -44,7 +44,13 @@ var helpers = {
     },
 
     getConversation: function (conversationId){
-        return axios.get(host + "/conversations/" + conversationId);
+        return axios({
+            url: host + "/conversations/" + conversationId,
+            method: 'GET',
+            headers: {
+                cid: conversationId
+            }
+        });
     },
 
     postMessage: function (text, conversationId){

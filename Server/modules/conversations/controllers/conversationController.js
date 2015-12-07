@@ -47,8 +47,8 @@ exports.getConversations = function(uid, next){
         })
     })
 }
-exports.getConversation = function(props, next){
-    Conversation.find({_id: props._id}, function(err, conversation){
+exports.getConversation = function(cid, next){
+    Conversation.find({_id: cid}, function(err, conversation){
         if(err) return next(err);
         return next(null, conversation);
     })
