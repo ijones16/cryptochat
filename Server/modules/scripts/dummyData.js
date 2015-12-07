@@ -18,20 +18,13 @@ var User = mongoose.model('User');
 var user1 = process.argv[2]
 var user2 = process.argv[3]
 var testUsers = []
-User.findOne({name: user1}, function(err, user){
-    if(err) return err;
-     testUsers.push(user._id);
-})
-User.findOne({name: user2}, function(err, user){
-    if(err) return err;
-    testUsers.push(user._id);
-})
+
 for (var i = 0; i < 20; i++) {
     conversationController.addConversation({
         name: 'Test convo',
         messages: [{text: 'test at test at test', name: 'elias'}, {text: 'test at test t', name: 'ian'}],
         messageCount: 2,
-        users: testUsers
+        users: ["5664cbded11f40bc4f96bc34", "5664cc0ed11f40bc4f96bc35" ]
     }, function (err, item) {
         if (err) return err;
         console.log("added convo")
