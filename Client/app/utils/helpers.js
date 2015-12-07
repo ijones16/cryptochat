@@ -24,9 +24,17 @@ var helpers = {
     },
 
     getAllConversations: function (userId){
-        return axios.get(host + "/conversations/", {
-            uId: userId
+        return axios({
+            url: host + "/conversations/",
+            method: 'GET',
+            params: {
+                uId: userId
+            }
         });
+
+        //    .get(host + "/conversations/", {
+        //    uId: userId
+        //});
     },
 
     getConversation: function (conversationId){
