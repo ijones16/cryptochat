@@ -24,13 +24,16 @@ var helpers = {
     },
 
     getAllConversations: function (userId){
-        return axios.get(host + "/conversations", {
+        return axios.get(host + "/conversations/", {
             uId: userId
         });
     },
+
     getConversation: function (conversationId){
-        console.log('cant get single conversation yet');
-        //return axios.get('ip' + conversationId);
+        return axios.get(host + "/conversations/" + conversationId)
+            .then(function(response){
+                console.log(response);
+            });
     },
     postMessage: function (text, conversationId){
         console.log('this will post a new message to the conversation')

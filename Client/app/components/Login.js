@@ -13,7 +13,10 @@ var Login = React.createClass({
         // log in logic
         helpers.userLogin(username, password)
         .then(function(response){
+            console.log(response);
+            console.log(response.data._id);
            if(response.status === 200){
+               localStorage.setItem('uId', response.data._id);
                self.history.pushState(null , "contacts/" + username);
            } else{
                console.log('user shouldnt log in');

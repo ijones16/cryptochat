@@ -8,11 +8,18 @@ var Contacts = React.createClass({
     mixins: [Router.State, History],
     getInitialState: function(){
         return {
-            conversations: ["thelias", "bridger", "zacjones"]
+            conversations: []
         }
     },
     componentDidMount: function(){
-        helpers.getAllConversations(this.props.params.username);
+        var userId = localStorage.getItem('uId');
+        helpers.getAllConversations(userId)
+            .then(function(data){
+                console.log(data);
+                this.setState({
+                    conversations: data
+                })
+            }.bind(this));
 
     },
     handleClick: function(conversation, index){
