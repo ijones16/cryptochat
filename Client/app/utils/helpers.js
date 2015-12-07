@@ -22,7 +22,15 @@ var helpers = {
             })
 
     },
-
+    findUser: function(name){
+        return axios({
+            url: host + "/users/:id",
+            method: 'GET',
+            headers: {
+                name: name
+            }
+        })
+    },
     getAllConversations: function (userId){
         return axios({
             url: host + "/conversations/",
