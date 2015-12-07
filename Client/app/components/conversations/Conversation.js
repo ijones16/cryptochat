@@ -10,11 +10,19 @@ var Conversation = React.createClass({
 
     componentDidMount: function(){
         helpers.getConversation(this.props.params.conversation)
-            .then(function(dataObj){
+            .then(function(response){
                 this.setState({
-                    messages: dataObj.messages,
+                    messages: response.messages,
                 });
             }.bind(this));
+
+        //helpers.getAllConversations(userId)
+        //    .then(function(response){
+        //        console.log(response);
+        //        this.setState({
+        //            conversations: response.data
+        //        })
+        //    }.bind(this));
     },
 
     render: function(){

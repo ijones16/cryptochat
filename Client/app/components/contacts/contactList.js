@@ -1,5 +1,5 @@
 var React = require('react');
-//require('./ContactList.css');
+require('./ContactList.css');
 
 var ContactsList = React.createClass({
 
@@ -9,8 +9,8 @@ var ContactsList = React.createClass({
             return <li
                 className="list-group-item contact-list"
                 key={index}
-                onClick={this.props.handleClick.bind(null, conversation, index)}>
-                {conversation}
+                onClick={this.props.handleClick.bind(null, conversation.name, conversation._id, index)}>
+                {conversation.name}
                  </li>
         }, this);
         return (

@@ -22,7 +22,8 @@ var Contacts = React.createClass({
             }.bind(this));
 
     },
-    handleClick: function(conversation, index){
+    handleClick: function(conversation, conversationId, index){
+        localStorage.setItem('cId', conversationId);
         this.history.pushState(null, "contacts/" + this.props.params.username + "/conversation/" + conversation);
     },
     render: function(){

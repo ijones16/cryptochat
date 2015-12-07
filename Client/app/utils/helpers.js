@@ -32,17 +32,13 @@ var helpers = {
             }
         });
 
-        //    .get(host + "/conversations/", {
-        //    uId: userId
-        //});
+
     },
 
     getConversation: function (conversationId){
-        return axios.get(host + "/conversations/" + conversationId)
-            .then(function(response){
-                console.log(response);
-            });
+        return axios.get(host + "/conversations/" + conversationId);
     },
+
     postMessage: function (text, conversationId){
         console.log('this will post a new message to the conversation')
     }
