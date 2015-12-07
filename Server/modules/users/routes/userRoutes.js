@@ -31,7 +31,7 @@ app.get('/users', function (req, res) {
 })
 app.get('/users/:id', function (req, res) {
     try {
-        userController.findUser(req.body, function (err, items) {
+        userController.findUser(req.headers, function (err, items) {
             console.log(req.body);
             if (err) {
                 logger.badrequest('get: /users/:id', {
