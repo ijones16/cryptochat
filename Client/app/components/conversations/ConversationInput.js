@@ -10,7 +10,7 @@ var ConverstationInput = React.createClass({
     },
     render: function(){
         return (
-            <div className="col-sm-12">
+            <div className="input-width">
                 <form onSubmit={this.handleSubmit}>
                     <input className="form-control" ref="userInput" placeholder="enter a message..."></input>
                 </form>

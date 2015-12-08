@@ -1,15 +1,13 @@
-var React = require('react');
+var React   = require('react');
+var Search  = require('./Search');
 var helpers = require('../utils/helpers');
+var History = require('react-router').History;
+
 
 var Main = React.createClass({
+    mixins: [History],
     handleSearch: function(){
-        var name = this.refs.searchText.value;
-        this.refs.searchText.value = '';
-        helpers.findUser(name)
-            .then(function(response){
-                console.log(response);
-                self.history.pushState(null , "search/" + username);
-            })
+        this.history.pushState(null , "search/all");
     },
     render: function(){
         return (
@@ -19,7 +17,7 @@ var Main = React.createClass({
                         Cryptochat
                     </div>
                     <form onSubmit={this.handleSearch}>
-                        <button type="submit" className="btn btn-primary">Find All Users</button>
+                        <button type="submit" className="btn btn-primary" style={{marginTop: 10}}>Find All Users</button>
                     </form>
                 </nav>
                 <div className="container">

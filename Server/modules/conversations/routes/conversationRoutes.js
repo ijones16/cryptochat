@@ -2,6 +2,7 @@
  * Created by Elias on 12/5/2015.
  */
 var conversationController = require('../controllers/conversationController');
+
 app.get('/conversations', function (req, res) {
     try {
         conversationController.getConversations(req.headers.uid, function (err, items) {
@@ -27,7 +28,8 @@ app.get('/conversations', function (req, res) {
         });
         return res.status(500).send('Bad Request');
     }
-})
+});
+
 app.get('/conversations/:id', function (req, res) {
     try {
         if (req.headers.check) {
@@ -70,7 +72,8 @@ app.get('/conversations/:id', function (req, res) {
         });
         return res.status(500).send('Bad Request');
     }
-})
+});
+
 app.post('/conversations', function (req, res) {
     try {
         conversationController.addConversation(req.body, function (err, items) {
@@ -96,7 +99,8 @@ app.post('/conversations', function (req, res) {
         });
         return res.status(500).send('Bad Request');
     }
-})
+});
+
 app.put('/conversations/:id', function (req, res) {
     try {
         conversationController.addMessageToConversation(req, function (err, items) {
@@ -122,4 +126,4 @@ app.put('/conversations/:id', function (req, res) {
         });
         return res.status(500).send('Bad Request');
     }
-})
+});

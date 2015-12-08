@@ -8,6 +8,7 @@ var Conversation = React.createClass({
     getInitialState: function(){
         return {
             messages: [],
+            isCurrentUser: true,
             cId: localStorage.getItem('cId')
         }
     },
@@ -23,7 +24,6 @@ var Conversation = React.createClass({
     },
 
     shouldComponentUpdate: function(nextProps, nextState) {
-        console.log("query has run");
         helpers.getConversation(this.state.cId)
             .then(function(response){
                 this.setState({
@@ -36,10 +36,15 @@ var Conversation = React.createClass({
     render: function(){
         var conversationName = this.props.params.conversation;
         return (
-            <div className="col-sm-12">
+            <div className="container">
                 <div className="text-center">{conversationName} Conversation:</div>
-                <ConversationList messages={this.state.messages}/>
-                <ConversationInput user={this.props.params.username}/>
+                <div className="col-sm-12">
+                    <ConversationList
+                        messages={this.state.messages}
+                        isCurrentUser={this.state.isCurrentUser}
+                        user={this.props.params.username}/>
+                    <ConversationInput user={this.props.params.username} />
+                </div>
             </div>
         );
     }

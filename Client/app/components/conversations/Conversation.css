@@ -1,0 +1,35 @@
+.chatList {
+    padding: 0 5%;
+}
+
+.chatList p {
+    width: 100%;
+}
+
+.chatList p.sent {
+    max-width: 45%;
+    padding: 10px;
+    margin: 10px 10px 10px 55%;
+    border-radius: 5px;
+    color:#FFFFFF;
+    background-color: #337ab7;
+}
+
+.chatList p.received {
+    max-width:45%;
+    padding: 10px;
+    margin:10px 10px 10px 0;
+    border-radius: 5px;
+    color:#222222;
+    background-color: #F2F2F2;
+}
+
+.chatList p small {
+    float: right;
+    margin-top: -8px;
+}
+
+.input-width{
+    width: 91%;
+    margin-left: 4%;
+}
