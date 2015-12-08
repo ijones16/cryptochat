@@ -2,6 +2,8 @@ var React             = require('react');
 var ConversationList  = require('./ConversationList');
 var ConversationInput = require('./ConversationInput');
 var helpers           = require('../../utils/helpers');
+var BackToContactsBtn = require('../contacts/BackToContactsBtn');
+require('./Conversation.css');
 
 var Conversation = React.createClass({
 
@@ -13,6 +15,10 @@ var Conversation = React.createClass({
         }
     },
 
+    componentWillMount: function(){
+        this.setState({messages: []});
+    },
+
     componentDidMount: function(){
 
         helpers.getConversation(this.state.cId)
@@ -22,6 +28,20 @@ var Conversation = React.createClass({
                 });
             }.bind(this));
     },
+
+
+    //componentWillUpdate: function() {
+    //    var node = this;
+    //    this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+    //},
+    //
+    //componentDidUpdate: function() {
+    //    if (this.shouldScrollBottom) {
+    //        var node = this;
+    //        node.scrollTop = node.scrollHeight
+    //    }
+    //},
+
 
     shouldComponentUpdate: function(nextProps, nextState) {
         helpers.getConversation(this.state.cId)
@@ -36,9 +56,10 @@ var Conversation = React.createClass({
     render: function(){
         var conversationName = this.props.params.conversation;
         return (
-            <div className="container">
+            <div className="container conversation-container">
+                <BackToContactsBtn />
                 <div className="text-center">{conversationName} Conversation:</div>
-                <div className="col-sm-12">
+                <div className="col-sm-12 conversation-items">
                     <ConversationList
                         messages={this.state.messages}
                         isCurrentUser={this.state.isCurrentUser}

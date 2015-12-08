@@ -7,7 +7,7 @@ var ContactsList = React.createClass({
 
         var conversations = this.props.conversations.map(function(conversation, index){
             return <li
-                className="list-group-item contact-list"
+                className="list-group-item contact-list pointer"
                 key={index}
                 onClick={this.props.handleClick.bind(null, conversation.name, conversation._id, index)}>
                 {conversation.name}
