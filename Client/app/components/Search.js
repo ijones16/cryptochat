@@ -41,7 +41,9 @@ var Search = React.createClass({
     },
 
     // Clicking a name will open a model
-    handleNewConvo: function(){
+    handleNewConvo: function(e){
+        e.preventDefault();
+
         var uId = localStorage.getItem('uId');
         var uname = localStorage.getItem('username');
         var friendId = this.state.friendId;

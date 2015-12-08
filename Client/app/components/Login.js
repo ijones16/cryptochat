@@ -4,7 +4,10 @@ var helpers = require('../utils/helpers');
 
 var Login = React.createClass({
     mixins: [History],
-    handleLogin: function(){
+
+    handleLogin: function(e){
+        e.preventDefault();
+
         var username = this.refs.logUsername.value;
         var password = this.refs.logPassword.value;
         this.refs.logUsername.value = '';
@@ -32,7 +35,8 @@ var Login = React.createClass({
 
 
     },
-    handleRegister: function(){
+    handleRegister: function(e){
+        e.preventDefault();
         var username = this.refs.regUsername.value;
         var password = this.refs.regPassword.value;
         this.refs.regUsername.value = '';

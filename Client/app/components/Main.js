@@ -16,7 +16,7 @@ var Main = React.createClass({
                 <nav className="navbar navbar-default" role="navigation">
                     <div className="col-sm-12" style={{marginTop: 15}}>
                         Cryptochat
-                        { localStorage.getItem('showLogout') ? <Buttons /> : null }
+                        { localStorage.getItem('showLogout') ? <Buttons handleSearch={this.handleSearch}/> : null }
                     </div>
                 </nav>
                 <div className="container">
@@ -31,7 +31,7 @@ var Buttons = React.createClass({
     render: function(){
         return(
             <div className="float-nav">
-                <button onClick={this.handleSearch} className="btn btn-primary" style={{marginBottom: 10, marginLeft: 10 }}>Find All Users</button>
+                <button onClick={this.props.handleSearch} className="btn btn-primary" style={{marginBottom: 10, marginLeft: 10 }}>Find All Users</button>
                 <Logout />
             </div>
         )
