@@ -1,7 +1,8 @@
 var React   = require('react');
-var Search  = require('./Search');
+var Logout  = require('./Logout');
 var helpers = require('../utils/helpers');
 var History = require('react-router').History;
+require('./NavStyle.css');
 
 
 var Main = React.createClass({
@@ -13,16 +14,25 @@ var Main = React.createClass({
         return (
             <div className="main-container">
                 <nav className="navbar navbar-default" role="navigation">
-                    <div className="col-sm-8 col-sm-offset-1" style={{marginTop: 15}}>
+                    <div className="col-sm-12" style={{marginTop: 15}}>
                         Cryptochat
+                        { localStorage.getItem('showLogout') ? <Buttons /> : null }
                     </div>
-                    <form onSubmit={this.handleSearch}>
-                        <button type="submit" className="btn btn-primary" style={{marginTop: 10}}>Find All Users</button>
-                    </form>
                 </nav>
                 <div className="container">
                     {this.props.children}
                 </div>
+            </div>
+        )
+    }
+});
+
+var Buttons = React.createClass({
+    render: function(){
+        return(
+            <div className="float-nav">
+                <button onClick={this.handleSearch} className="btn btn-primary" style={{marginBottom: 10, marginLeft: 10 }}>Find All Users</button>
+                <Logout />
             </div>
         )
     }

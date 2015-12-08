@@ -18,6 +18,7 @@ var Login = React.createClass({
            if(response.status === 200){
                localStorage.setItem('uId', response.data._id);
                localStorage.setItem('username', response.data.name);
+               localStorage.setItem('showLogout', true);
                self.history.pushState(null , "contacts/" + username);
            } else{
                console.log('user shouldnt log in');
