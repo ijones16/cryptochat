@@ -8,11 +8,18 @@ var Router       = require('react-router');
 var IndexRoute   = Router.IndexRoute;
 var Route        = Router.Route;
 
+
 module.exports = (
     <Route path="/" component={Main}>
-        <Route path="contacts/:username" component={Contacts}/>
-        <Route path="search/all" component={Search}/>
-        <Route path="contacts/:username/conversation/:conversation" component={Conversation}/>
+        <Route
+            path="contacts/:username"
+            component={Contacts}/>
+        <Route
+            path="search/all"
+            component={Search}/>
+        <Route
+            path="contacts/:username/conversation/:conversation"
+            component={Conversation}/>
         <IndexRoute component={Home}/>
     </Route>
 );

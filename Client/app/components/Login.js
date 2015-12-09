@@ -4,7 +4,10 @@ var helpers = require('../utils/helpers');
 
 var Login = React.createClass({
     mixins: [History],
-    handleLogin: function(){
+
+    handleLogin: function(e){
+        e.preventDefault();
+
         var username = this.refs.logUsername.value;
         var password = this.refs.logPassword.value;
         this.refs.logUsername.value = '';
@@ -18,6 +21,7 @@ var Login = React.createClass({
            if(response.status === 200){
                localStorage.setItem('uId', response.data._id);
                localStorage.setItem('username', response.data.name);
+               localStorage.setItem('showLogout', true);
                self.history.pushState(null , "contacts/" + username);
            } else{
                console.log('user shouldnt log in');
@@ -31,7 +35,8 @@ var Login = React.createClass({
 
 
     },
-    handleRegister: function(){
+    handleRegister: function(e){
+        e.preventDefault();
         var username = this.refs.regUsername.value;
         var password = this.refs.regPassword.value;
         this.refs.regUsername.value = '';

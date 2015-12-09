@@ -33,3 +33,12 @@
     width: 91%;
     margin-left: 4%;
 }
+
+.conversation-container{
+    position: absolute;
+    height: 700px;
+}
+
+.conversation-items{
+    position: relative;
+}
