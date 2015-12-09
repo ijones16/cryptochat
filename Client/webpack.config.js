@@ -20,7 +20,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 loader: 'babel',
                 query: {
                     // https://github.com/babel/babel-loader#options
