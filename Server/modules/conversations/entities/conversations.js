@@ -14,7 +14,7 @@ module.exports = function(){
          ,name:{type: String}
          ,messages:[MessageSchema]
          ,created: { type: Date, default:new Date() }
-         ,messageCount: {type:Number}
+         ,messageCount: {type:Number, default: 0}
          ,users:[{type: ObjectId, ref :'User'}]
      })
     mongoose.model('Conversation', ConversationSchema);
