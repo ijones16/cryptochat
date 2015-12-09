@@ -73,8 +73,11 @@ var Search = React.createClass({
     },
     render: function(){
         var self = this;
+        var sessionUser = localStorage.getItem('uId');
         var users = this.state.users.map(function(user, index){
-           return <ListItem openModal={self.openModal} user={user} key={index}/>
+            if(sessionUser !== user._id){
+                return <ListItem openModal={self.openModal} user={user} key={index}/>
+            }
         });
 
 

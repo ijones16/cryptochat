@@ -1,5 +1,6 @@
 var axios = require('axios');
-var host = 'http://localhost:5656';
+var host = 'http://45.55.147.162:5656';
+//var host = 'http://localhost:5656';
 
 var helpers = {
 
